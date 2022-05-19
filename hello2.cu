@@ -13,25 +13,33 @@
 
 __global__ void hello ()
 {
-//   int myID = ( blockIdx.z * gridDim.x * gridDim.y  + 
-//                blockIdx.y * gridDim.x + 
-//                blockIdx.x ) * blockDim.x * blockDim.y * blockDim.z + 
-//                threadIdx.z *  blockDim.x * blockDim.y + 
-//                threadIdx.y * blockDim.x + 
-//                threadIdx.x; 
-
+  // CHANGE: uncommented this
   int myID = ( blockIdx.z * gridDim.x * gridDim.y  + 
                blockIdx.y * gridDim.x + 
-               blockIdx.x ) * blockDim.x + 
+               blockIdx.x ) * blockDim.x * blockDim.y * blockDim.z + 
+               threadIdx.z *  blockDim.x * blockDim.y + 
+               threadIdx.y * blockDim.x + 
                threadIdx.x; 
+
+
+  // int myID = ( blockIdx.z * gridDim.x * gridDim.y  + 
+  //              blockIdx.y * gridDim.x + 
+  //              blockIdx.x ) * blockDim.x + 
+  //              threadIdx.x; 
 
   printf ("Hello world from %i\n", myID);
 }
 
 int main ()
 {
-  dim3 g (4, 3, 2);
-  hello <<< g, 10 >>> ();
+  // dim3 g (4, 3, 2);
+  // hello <<< g, 10 >>> ();
+
+  // CHANGE: added this
+  dim3 g (4,2);
+  dim3 b (32,16);
+  hello <<<g, b>>>();
+
   cudaThreadSynchronize ();
   return 0;
 }
