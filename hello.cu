@@ -36,7 +36,7 @@ __global__ void hello()
 //CHANGE: Running hello with 1 block of 2048 threads
 int main()
 {
-  hello<<<2,1024>>>();
+  hello<<<2,2048>>>();
   cudaThreadSynchronize();
   return 0;
 }
