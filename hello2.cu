@@ -28,7 +28,7 @@ __global__ void hello ()
   //              threadIdx.x; 
 
   // CHANGE: added this conditional to show only if myId is 100,000
-  if (myID === 100000) printf ("Hello world from %i\n", myID);
+  if (myID === 100000) printf ("Hello world from %i\n", myID); else printf ("");
 }
 
 int main ()
