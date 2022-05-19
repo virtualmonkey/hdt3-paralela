@@ -27,7 +27,10 @@ __global__ void hello ()
   //              blockIdx.x ) * blockDim.x + 
   //              threadIdx.x; 
 
-  printf ("Hello world from %i\n", myID);
+  // CHANGE: added this conditional to show only if myId is 100,000
+  if (myID === 100000){
+    printf ("Hello world from %i\n", myID);
+  }
 }
 
 int main ()
@@ -36,9 +39,13 @@ int main ()
   // hello <<< g, 10 >>> ();
 
   // CHANGE: added this
-  dim3 g (4,2);
-  dim3 b (32,16);
-  hello <<<g, b>>>();
+  // dim3 g (4,2);
+  // dim3 b (32,16);
+  // hello <<<g, b>>>();
+
+  // CHANGE: configuration for 10,000 threads
+  dim3 g (10,10,100);
+  hello <<<g, 10>>>();
 
   cudaThreadSynchronize ();
   return 0;
