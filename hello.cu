@@ -16,6 +16,24 @@ __global__ void hello()
    printf("Hello world\n");
 }
 
+// CHANGE: Initial main
+// int main()
+// {
+//   hello<<<1,10>>>();
+//   cudaThreadSynchronize();
+//   return 0;
+// }
+
+// CHANGE: Running hello with 2 blocks of 1024 threads
+// int main()
+// {
+//   hello<<<2,1024>>>();
+//   cudaThreadSynchronize();
+//   return 0;
+// }
+
+
+//CHANGE: Running hello with 1 block of 2048 threads
 int main()
 {
   hello<<<2,1024>>>();
